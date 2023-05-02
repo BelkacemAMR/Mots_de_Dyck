@@ -1,5 +1,5 @@
 
-## Version 1 provisoire
+## Version 1 provisoire:
 
 # def is_a_dyck_word(word: str) -> bool:
 #     stack = []
@@ -15,7 +15,8 @@
 #     return len(stack) == 0
 
 
-## Version 2 Provisoire
+## Version 2 Provisoire :
+
 def is_a_dyck_word(word):
     opening_symbols = set('([{‹«')
     closing_symbols = set(')]}›»')
@@ -29,4 +30,8 @@ def is_a_dyck_word(word):
             elif opening_symbols.index(stack.pop()) != closing_symbols.index(c):
                 return False
     return not stack
+
+
+# Exemple d'utilisation :
+
 
