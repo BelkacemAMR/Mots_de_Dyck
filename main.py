@@ -48,4 +48,18 @@ def is_a_dyck_word(word):
 
 # Exemple d'utilisation :
 
-is_a_dyck_word('f(((())))')
+from dyck_word import is_a_dyck_word
+
+# Test with valid Dyck word
+word1 = "(<{}>)[]"
+if is_a_dyck_word(word1):
+    print(f"'{word1}' is a valid Dyck word.")
+else:
+    print(f"'{word1}' is not a valid Dyck word.")
+
+# Test with invalid Dyck word
+word2 = "(()))"
+if is_a_dyck_word(word2):
+    print(f"'{word2}' is a valid Dyck word.")
+else:
+    print(f"'{word2}' is not a valid Dyck word.")
