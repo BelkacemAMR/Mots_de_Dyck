@@ -1,7 +1,7 @@
 # Mots de Dyck
 
 
-## Mots de Dyck ? 
+### Mots de Dyck ? 
 
 Ce programme permet de vérifier si une expression donnée est une expression dyck valide. Une expression dyck est une expression qui utilise des paires de symboles tels que (), [], {}, ‹› ou «» et qui respecte les règles suivantes :
 
