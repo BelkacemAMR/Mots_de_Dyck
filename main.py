@@ -1,65 +1,42 @@
+def is_a_dyck_word(word: str) -> bool:
+    # Si le mot est vide, il est correctement parenthésé
+    if not word:
+        return True
 
-## Version 1 provisoire: ------
+    # Si le mot a une longueur impaire, il n'est pas correctement parenthésé
+    if len(word) % 2 != 0:
+        return False
 
-# def is_a_dyck_word(word: str) -> bool:
-#     stack = []
-#     for c in word:
-#         if c == '(':
-#             stack.append(c)
-#         elif c == ')':
-#             if len(stack) == 0:
-#                 return False
-#             stack.pop()
-#         else:
-#             return False
-#     return len(stack) == 0
+    # Si le mot contient plus de deux symboles différents, il n'est pas valide
+    if len(set(word)) > 2:
+        return False
 
+    # On déduit les symboles ouvrant et fermant en fonction de leur ordre d'apparition
+    opening = word[0]
+    closing = word[-1]  # On prend le dernier caractère au lieu du deuxième
 
-# ## Version 2 Provisoire :  ----
-#
-# def is_a_dyck_word(word):
-#     opening_symbols = set('([{‹«')
-#     closing_symbols = set(')]}›»')
-#     stack = []
-#     for c in word:
-#         if c in opening_symbols:
-#             stack.append(c)
-#         elif c in closing_symbols:
-#             if not stack:
-#                 return False
-#             elif opening_symbols.index(stack.pop()) != closing_symbols.index(c):
-#                 return False
-#     return not stack
-
-
-# Version 3 :
-
-def is_a_dyck_word(word):
-    opening_symbols = {'[', '{', '(', '‹', '«', '“', '‘'}
-    closing_symbols = {']', '}', ')', '›', '»', '”', '’'}
+    # On crée une pile vide
     stack = []
-    for c in word:
-        if c in opening_symbols:
-            stack.append(c)
-        elif c in closing_symbols:
-            if not stack or opening_symbols.index(stack.pop()) != closing_symbols.index(c):
+
+    # On parcourt le mot caractère par caractère
+    for char in word:
+        # Si on rencontre un symbole ouvrant, on l'empile
+        if char == opening:
+            stack.append(char)
+        # Si on rencontre un symbole fermant, on le compare avec le sommet de la pile
+        elif char == closing:
+            # Si la pile est vide, il y a un déséquilibre
+            if not stack:
                 return False
+            # Si le sommet de la pile est différent du symbole fermant, il y a une erreur
+            if stack[-1] != opening:
+                return False
+            # Sinon, on dépile le sommet de la pile
+            else:
+                stack.pop()
+        # Si on rencontre un autre symbole, il y a une erreur
+        else:
+            return False
+
+    # À la fin du mot, si la pile est vide, le mot est correctement parenthésé
     return not stack
-
-# Exemple d'utilisation :
-
-from dyck_word import is_a_dyck_word
-
-# Test with valid Dyck word
-word1 = "(<{}>)[]"
-if is_a_dyck_word(word1):
-    print(f"'{word1}' is a valid Dyck word.")
-else:
-    print(f"'{word1}' is not a valid Dyck word.")
-
-# Test with invalid Dyck word
-word2 = "(()))"
-if is_a_dyck_word(word2):
-    print(f"'{word2}' is a valid Dyck word.")
-else:
-    print(f"'{word2}' is not a valid Dyck word.")
